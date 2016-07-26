@@ -1,15 +1,60 @@
 package com.android.yl.phonemanager;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class SplashActivity extends AppCompatActivity {
 
     private TextView tvVersion;
+    private String mVersionName;
+    private int mVersionCode;
+    private String mDesc;
+    private String mDownloadUrl;
+
+    private static final int CODE_UPLOAD_DIALOG = 0;
+    private static final int CODE_URL_ERROR = 1;
+    private static final int CODE_IO_ERROR = 2;
+    private static final int CODE_JSON_ERROR = 3;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case CODE_UPLOAD_DIALOG:
+                    showUpdateDialog();
+                    break;
+                case CODE_IO_ERROR:
+                    Toast.makeText(SplashActivity.this, "CODE_IO_ERROR", Toast.LENGTH_SHORT).show();
+                    break;
+                case CODE_JSON_ERROR:
+                    Toast.makeText(SplashActivity.this, "CODE_JSON_ERROR", Toast.LENGTH_SHORT).show();
+                    break;
+                case CODE_URL_ERROR:
+                    Toast.makeText(SplashActivity.this, "CODE_URL_ERROR", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
+    private HttpURLConnection connection;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +63,14 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.content_splash);
         tvVersion = (TextView) findViewById(R.id.tv_version);
         tvVersion.setText("版本号:" + getVersionName());
+        checkVersion();
     }
 
+    /**
+     * 获取当前程序的版本号
+     *
+     * @return
+     */
     private String getVersionName() {
         PackageManager packageManager = getPackageManager();
         try {
@@ -34,4 +85,109 @@ public class SplashActivity extends AppCompatActivity {
         }
         return "";
     }
+
+    /**
+     * 传给获得的返回码
+     *
+     * @return
+     */
+    private int getVersionCode() {
+        PackageManager packageManager = getPackageManager();
+        try {
+            PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
+            int versionCode = packageInfo.versionCode;
+            String versionName = packageInfo.versionName;
+            System.out.println("versionCode" + versionCode + "versionName" + versionName);
+
+            return versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    /**
+     * 检查版本更新
+     */
+    public void checkVersion() {
+        new Thread() {
+
+            Message msg = Message.obtain();//获取一个方法
+
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL("http://192.168.1.106:8080/update.json");
+                    connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");//设置请求方法
+                    connection.setConnectTimeout(5000);//设置连接超时时间
+                    connection.setReadTimeout(5000);//设置读取超时时间
+                    connection.connect();//连接到服务器
+
+                    int responseCode = connection.getResponseCode();
+                    if (responseCode == 200) {
+                        InputStream inputStream = connection.getInputStream();
+                        String reslut = StreamUtils.readFromStream(inputStream);
+                        System.out.println("网络返回" + reslut);
+                        JSONObject jo = new JSONObject(reslut);
+                        mVersionName = jo.getString("versionName");
+                        mVersionCode = jo.getInt("versionCode");
+                        mDesc = jo.getString("description");
+                        mDownloadUrl = jo.getString("downloadUrl");
+
+                        if (mVersionCode > getVersionCode()) {
+                            //showUpdateDialog();//在此处不能调用显示对话框的方法，相当于在子线程中刷新ui，所以要写一个handler方法。
+                            msg.what = CODE_UPLOAD_DIALOG;
+                        }
+
+                    }
+
+                } catch (MalformedURLException e) {
+                    msg.what = CODE_URL_ERROR;
+                    //url解析异常
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    msg.what = CODE_IO_ERROR;
+                    //网络异常
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    msg.what = CODE_JSON_ERROR;
+                    //json解析异常
+                    e.printStackTrace();
+                }finally {
+                    mHandler.sendMessage(msg);
+                    if (connection!=null){
+                        connection.disconnect();
+                    }
+
+                }
+            }
+        }.start();
+
+    }
+
+    /**
+     * 升级对话框
+     */
+    private void showUpdateDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("最新版本" + mVersionName);
+        builder.setMessage(mDesc);
+        builder.setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(SplashActivity.this, mDownloadUrl, Toast.LENGTH_LONG).show();
+            }
+        });
+        builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(SplashActivity.this, "下次更新", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.show();
+
+    }
+
+
 }
