@@ -2,6 +2,7 @@ package com.android.yl.phonemanager;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ public class SplashActivity extends AppCompatActivity {
     private static final int CODE_URL_ERROR = 1;
     private static final int CODE_IO_ERROR = 2;
     private static final int CODE_JSON_ERROR = 3;
+    private static final int CODE_ENTER_HOME = 4;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -49,6 +51,11 @@ public class SplashActivity extends AppCompatActivity {
                     break;
                 case CODE_URL_ERROR:
                     Toast.makeText(SplashActivity.this, "CODE_URL_ERROR", Toast.LENGTH_SHORT).show();
+                    break;
+                case CODE_ENTER_HOME:
+                    enterHome();
+                    Toast.makeText(SplashActivity.this, "CODE_URL_ERROR", Toast.LENGTH_SHORT).show();
+
                     break;
             }
         }
@@ -116,6 +123,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void run() {
+                long startTime=System.currentTimeMillis();
                 try {
                     URL url = new URL("http://192.168.1.106:8080/update.json");
                     connection = (HttpURLConnection) url.openConnection();
@@ -138,6 +146,8 @@ public class SplashActivity extends AppCompatActivity {
                         if (mVersionCode > getVersionCode()) {
                             //showUpdateDialog();//在此处不能调用显示对话框的方法，相当于在子线程中刷新ui，所以要写一个handler方法。
                             msg.what = CODE_UPLOAD_DIALOG;
+                        }else {
+                            msg.what=CODE_ENTER_HOME;
                         }
 
                     }
@@ -155,6 +165,15 @@ public class SplashActivity extends AppCompatActivity {
                     //json解析异常
                     e.printStackTrace();
                 }finally {
+                    long endTime=System.currentTimeMillis();
+                    long usedTime=endTime-startTime;
+                    if (usedTime<2000){
+                        try {
+                            Thread.sleep(2000-usedTime);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     mHandler.sendMessage(msg);
                     if (connection!=null){
                         connection.disconnect();
@@ -176,17 +195,25 @@ public class SplashActivity extends AppCompatActivity {
         builder.setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(SplashActivity.this, mDownloadUrl, Toast.LENGTH_LONG).show();
+                Toast.makeText(SplashActivity.this, "下载地址是:"+mDownloadUrl, Toast.LENGTH_LONG).show();
+
             }
         });
-        builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(SplashActivity.this, "下次更新", Toast.LENGTH_SHORT).show();
+                enterHome();
             }
         });
         builder.show();
 
+    }
+
+    private void enterHome() {
+        Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 

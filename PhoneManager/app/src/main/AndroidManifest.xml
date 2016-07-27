@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android.yl.phonemanager">
 
-    <!--添加网络权限-->
-    <uses-permission  android:name="android.permission.INTERNET"/>
+    <!-- 添加网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -21,6 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"></activity>
     </application>
 
 </manifest>
