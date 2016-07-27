@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">PhoneManager</string>
+    <string name="app_name">手机管理</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="scrollText">GridView 是 DataGrid的后继控件，在.net framework 2 中，虽然还存在DataGrid，但是GridView已经走上了历史的前台，取代DataGrid的趋势已是势不可挡。</string>
 </resources>

@@ -54,12 +54,15 @@ public class SplashActivity extends AppCompatActivity {
                     break;
                 case CODE_IO_ERROR:
                     Toast.makeText(SplashActivity.this, "CODE_IO_ERROR", Toast.LENGTH_SHORT).show();
+                    enterHome();
                     break;
                 case CODE_JSON_ERROR:
                     Toast.makeText(SplashActivity.this, "CODE_JSON_ERROR", Toast.LENGTH_SHORT).show();
+                    enterHome();
                     break;
                 case CODE_URL_ERROR:
                     Toast.makeText(SplashActivity.this, "CODE_URL_ERROR", Toast.LENGTH_SHORT).show();
+                    enterHome();
                     break;
                 case CODE_ENTER_HOME:
                     enterHome();
