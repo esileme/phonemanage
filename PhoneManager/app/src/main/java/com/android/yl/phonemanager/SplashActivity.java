@@ -203,6 +203,7 @@ public class SplashActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("最新版本" + mVersionName);
         builder.setMessage(mDesc);
+        builder.setCancelable(false);//禁用返回键功能
         builder.setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -247,7 +248,8 @@ public class SplashActivity extends AppCompatActivity {
                     intent.addCategory(Intent.CATEGORY_DEFAULT);
                     intent.setDataAndType(Uri.fromFile(arg0.result),
                             "application/vnd.android.package-archive");
-                    startActivity(intent);
+                    //startActivity(intent);
+                    startActivityForResult(intent,0);
 
                 }
 
@@ -259,6 +261,12 @@ public class SplashActivity extends AppCompatActivity {
         } else {
             Toast.makeText(SplashActivity.this, "没有sd卡", Toast.LENGTH_SHORT).show();
         }
+    }
+    //返回结果与startActivityForResult配对
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        enterHome();
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void enterHome() {
