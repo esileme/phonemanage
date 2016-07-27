@@ -24,5 +24,13 @@
     android:layout_below="@id/tv_version"
     />
 
-
+<TextView
+    android:id="@+id/tv_progress"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentLeft="true"
+    android:layout_marginLeft="5dp"
+    android:visibility="gone"
+    android:text="下载进度"/>
 </RelativeLayout>

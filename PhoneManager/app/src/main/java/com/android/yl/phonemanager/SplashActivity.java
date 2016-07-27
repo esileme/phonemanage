@@ -9,13 +9,20 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -29,6 +36,7 @@ public class SplashActivity extends AppCompatActivity {
     private int mVersionCode;
     private String mDesc;
     private String mDownloadUrl;
+    private TextView tvProgress;
 
     private static final int CODE_UPLOAD_DIALOG = 0;
     private static final int CODE_URL_ERROR = 1;
@@ -70,6 +78,8 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.content_splash);
         tvVersion = (TextView) findViewById(R.id.tv_version);
         tvVersion.setText("版本号:" + getVersionName());
+
+        tvProgress = (TextView) findViewById(R.id.tv_progress);
         checkVersion();
     }
 
@@ -123,7 +133,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                long startTime=System.currentTimeMillis();
+                long startTime = System.currentTimeMillis();
                 try {
                     URL url = new URL("http://192.168.1.106:8080/update.json");
                     connection = (HttpURLConnection) url.openConnection();
@@ -146,8 +156,8 @@ public class SplashActivity extends AppCompatActivity {
                         if (mVersionCode > getVersionCode()) {
                             //showUpdateDialog();//在此处不能调用显示对话框的方法，相当于在子线程中刷新ui，所以要写一个handler方法。
                             msg.what = CODE_UPLOAD_DIALOG;
-                        }else {
-                            msg.what=CODE_ENTER_HOME;
+                        } else {
+                            msg.what = CODE_ENTER_HOME;
                         }
 
                     }
@@ -164,18 +174,18 @@ public class SplashActivity extends AppCompatActivity {
                     msg.what = CODE_JSON_ERROR;
                     //json解析异常
                     e.printStackTrace();
-                }finally {
-                    long endTime=System.currentTimeMillis();
-                    long usedTime=endTime-startTime;
-                    if (usedTime<2000){
+                } finally {
+                    long endTime = System.currentTimeMillis();
+                    long usedTime = endTime - startTime;
+                    if (usedTime < 2000) {
                         try {
-                            Thread.sleep(2000-usedTime);
+                            Thread.sleep(2000 - usedTime);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
                     mHandler.sendMessage(msg);
-                    if (connection!=null){
+                    if (connection != null) {
                         connection.disconnect();
                     }
 
@@ -195,8 +205,8 @@ public class SplashActivity extends AppCompatActivity {
         builder.setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(SplashActivity.this, "下载地址是:"+mDownloadUrl, Toast.LENGTH_LONG).show();
-
+                Toast.makeText(SplashActivity.this, "下载地址是:" + mDownloadUrl, Toast.LENGTH_SHORT).show();
+                downLoad();//开始下载文件
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -210,8 +220,38 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
+    private void downLoad() {
+        if (true) {
+            String target = getFilesDir() + "/app.apk";
+            //使用utils工具下载文件
+            HttpUtils utils = new HttpUtils();
+            tvProgress.setVisibility(View.VISIBLE);
+
+            utils.download(mDownloadUrl, target, new RequestCallBack<File>() {
+                @Override
+                public void onLoading(long total, long current, boolean isUploading) {
+                    super.onLoading(total, current, isUploading);
+                    System.out.println("下载进度" + current + "/" + total);
+                    tvProgress.setText("下载进度"+current*100/total+"%");
+                }
+
+                @Override
+                public void onSuccess(ResponseInfo<File> responseInfo) {
+                    Toast.makeText(SplashActivity.this, "下载成功", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(HttpException error, String msg) {
+                    Toast.makeText(SplashActivity.this, "下载失败", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(SplashActivity.this, "没有sd卡", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void enterHome() {
-        Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
