@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -220,6 +221,9 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 下载页面的制作与完成
+     */
     private void downLoad() {
         if (true) {
             String target = getFilesDir() + "/app.apk";
@@ -232,12 +236,19 @@ public class SplashActivity extends AppCompatActivity {
                 public void onLoading(long total, long current, boolean isUploading) {
                     super.onLoading(total, current, isUploading);
                     System.out.println("下载进度" + current + "/" + total);
-                    tvProgress.setText("下载进度"+current*100/total+"%");
+                    tvProgress.setText("下载进度" + current * 100 / total + "%");
                 }
 
                 @Override
-                public void onSuccess(ResponseInfo<File> responseInfo) {
+                public void onSuccess(ResponseInfo<File> arg0) {
                     Toast.makeText(SplashActivity.this, "下载成功", Toast.LENGTH_SHORT).show();
+                    //在下载成功后，系统自动跳转到安装界面
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.addCategory(Intent.CATEGORY_DEFAULT);
+                    intent.setDataAndType(Uri.fromFile(arg0.result),
+                            "application/vnd.android.package-archive");
+                    startActivity(intent);
+
                 }
 
                 @Override
