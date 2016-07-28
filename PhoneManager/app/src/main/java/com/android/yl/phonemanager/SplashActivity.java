@@ -3,6 +3,7 @@ package com.android.yl.phonemanager;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -53,20 +54,20 @@ public class SplashActivity extends AppCompatActivity {
                     showUpdateDialog();
                     break;
                 case CODE_IO_ERROR:
-                    Toast.makeText(SplashActivity.this, "CODE_IO_ERROR", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SplashActivity.this, "网络异常", Toast.LENGTH_SHORT).show();
                     enterHome();
                     break;
                 case CODE_JSON_ERROR:
-                    Toast.makeText(SplashActivity.this, "CODE_JSON_ERROR", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SplashActivity.this, "json解析异常", Toast.LENGTH_SHORT).show();
                     enterHome();
                     break;
                 case CODE_URL_ERROR:
-                    Toast.makeText(SplashActivity.this, "CODE_URL_ERROR", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SplashActivity.this, "url解析异常", Toast.LENGTH_SHORT).show();
                     enterHome();
                     break;
                 case CODE_ENTER_HOME:
                     enterHome();
-                    Toast.makeText(SplashActivity.this, "CODE_URL_ERROR", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SplashActivity.this, "进入了主页面", Toast.LENGTH_SHORT).show();
 
                     break;
             }
@@ -84,7 +85,14 @@ public class SplashActivity extends AppCompatActivity {
         tvVersion.setText("版本号:" + getVersionName());
 
         tvProgress = (TextView) findViewById(R.id.tv_progress);
-        checkVersion();
+        SharedPreferences preferences = getSharedPreferences("cfg", MODE_PRIVATE);
+
+        boolean autoUpdate = preferences.getBoolean("auto_update", true);
+        if (autoUpdate) {
+            checkVersion();
+        } else {
+            mHandler.sendEmptyMessageDelayed(CODE_ENTER_HOME, 2000);
+        }
     }
 
     /**
@@ -252,7 +260,7 @@ public class SplashActivity extends AppCompatActivity {
                     intent.setDataAndType(Uri.fromFile(arg0.result),
                             "application/vnd.android.package-archive");
                     //startActivity(intent);
-                    startActivityForResult(intent,0);
+                    startActivityForResult(intent, 0);
 
                 }
 
@@ -265,6 +273,7 @@ public class SplashActivity extends AppCompatActivity {
             Toast.makeText(SplashActivity.this, "没有sd卡", Toast.LENGTH_SHORT).show();
         }
     }
+
     //返回结果与startActivityForResult配对
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

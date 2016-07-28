@@ -22,12 +22,18 @@
         android:textColor="#aff0"
         android:textSize="18dp" />
 
+    <!--设置不能点击checked-->
+    <!--设置不能获取焦点focusable-->
+    <!--设置不能触摸无响应focusableInTouchMode-->
     <CheckBox
         android:id="@+id/cb_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:checked="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
 
     <TextView
         android:layout_width="match_parent"
