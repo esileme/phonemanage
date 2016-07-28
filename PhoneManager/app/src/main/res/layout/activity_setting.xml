@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.android.yl.phonemanager.SettingActivity">
 
     <TextView
         style="@style/TitleStyle"
-        android:text="设置中心"/>
+        android:text="设置中心" />
 
-</RelativeLayout>
+    <com.android.yl.phonemanager.SettingItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <com.android.yl.phonemanager.SettingItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <com.android.yl.phonemanager.SettingItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>
