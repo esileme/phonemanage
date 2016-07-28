@@ -23,8 +23,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"></activity>
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_main" />
+        <activity
+            android:name=".SettingActivity"
+            android:label="@string/title_activity_setting"></activity>
     </application>
 
 </manifest>

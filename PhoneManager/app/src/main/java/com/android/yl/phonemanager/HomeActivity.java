@@ -1,6 +1,7 @@
 package com.android.yl.phonemanager;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import android.widget.TextView;
  *
  * @author 11111111111111111
  */
-public class MainActivity extends Activity {
+public class HomeActivity extends Activity {
 
     private GridView gvHome;
 
@@ -30,7 +31,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
 
         gvHome = (GridView) findViewById(R.id.gv_home);
         gvHome.setAdapter(new HomeAdapter());
@@ -45,17 +46,27 @@ public class MainActivity extends Activity {
 
         @Override
         public Object getItem(int position) {
+
             return mItems[position];
         }
 
         @Override
         public long getItemId(int position) {
+
+            //获取位置信息，判断点击的位置，如果点击到一个item，就跳转到到当前的item
+            switch (position){
+                case 8:
+                    //Intent intent = new Intent(HomeActivity.this,SettingActivity.class);
+                    startActivity(new Intent(HomeActivity.this,SettingActivity.class));
+                    break;
+            }
+
             return position;
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view = View.inflate(MainActivity.this,
+            View view = View.inflate(HomeActivity.this,
                     R.layout.home_list_item, null);
             ImageView ivItem = (ImageView) view.findViewById(R.id.iv_item);
             TextView tvItem = (TextView) view.findViewById(R.id.tv_item);

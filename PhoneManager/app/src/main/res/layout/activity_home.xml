@@ -3,17 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.android.yl.phonemanager.MainActivity"
+    tools:context=".HomeActivity"
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#8866ff00"
-        android:gravity="center"
+        style="@style/TitleStyle"
         android:text="功能列表"
-        android:textColor="#000"
-        android:textSize="22sp" />
+        />
 
     <com.android.yl.phonemanager.FocusedTextView
         android:layout_width="wrap_content"
