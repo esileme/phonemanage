@@ -27,6 +27,7 @@ public class SettingActivity extends Activity {
             sivUpdate.setChecked(false);
             sivUpdate.setDesc("自动更新已经关闭");
         }
+
         sivUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,16 +35,17 @@ public class SettingActivity extends Activity {
                 if (sivUpdate.isChecked()) {
                     sivUpdate.setChecked(false);
                     sivUpdate.setDesc("自动更新已经关闭");
-                    //sp保存的字段叫autoupte，值为false
-                    cfgsPreferences.edit().putBoolean("auto_update",true).commit();
+                    //sp保存的字段叫autoupdate，值为false
+                    cfgsPreferences.edit().putBoolean("auto_update", false).commit();
                 } else {
                     sivUpdate.setChecked(true);
-                    sivUpdate.setDesc("自动更新已经开启");
-                    //cfgsPreferences.edit().putBoolean("auto_update", false).commit();
-                    cfgsPreferences.edit().putBoolean("auto_update",false).commit();
+                    sivUpdate.setDesc("自动更新已经打开");
+                   // cfgsPreferences.edit().putBoolean("auto_update", false).commit();
+                    cfgsPreferences.edit().putBoolean("auto_update", true).commit();
                 }
             }
         });
+
     }
 
 }

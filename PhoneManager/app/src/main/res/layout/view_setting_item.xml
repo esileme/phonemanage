@@ -8,7 +8,6 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="自动更新设置"
         android:textColor="#fff"
         android:textSize="22dp" />
 
@@ -18,11 +17,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_title"
         android:layout_marginTop="3dp"
-        android:text="自动更新已经开启"
         android:textColor="#aff0"
         android:textSize="18dp" />
 
-    <!--设置不能点击checked-->
+    <!--设置不能点击不是checked而是clickable-->
     <!--设置不能获取焦点focusable-->
     <!--设置不能触摸无响应focusableInTouchMode-->
     <CheckBox
@@ -31,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:checked="false"
+        android:clickable="false"
         android:focusable="false"
         android:focusableInTouchMode="false" />
 

@@ -13,6 +13,8 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.AlphaAnimation;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,6 +88,11 @@ public class SplashActivity extends AppCompatActivity {
 
         tvProgress = (TextView) findViewById(R.id.tv_progress);
         SharedPreferences preferences = getSharedPreferences("cfg", MODE_PRIVATE);
+
+        RelativeLayout rlRoot = (RelativeLayout) findViewById(R.id.rl_root_splash);
+        AlphaAnimation animation = new AlphaAnimation(0.3f, 1f);
+        animation.setDuration(2000);
+        rlRoot.startAnimation(animation);
 
         boolean autoUpdate = preferences.getBoolean("auto_update", true);
         if (autoUpdate) {

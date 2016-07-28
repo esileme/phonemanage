@@ -50,11 +50,14 @@ public class SettingItemView extends RelativeLayout {
     public void setDesc(String desc){
         tvDesc.setText(desc);
     }
-    public void setChecked(boolean b){
-        cbStatus.setChecked(b);
+    public void setChecked(boolean check){
+        cbStatus.setChecked(check);
     }
     //返回cb的勾选状态
+    //此处bug：返回不了checkbox的结果。
+    //bug解决：原来是checkbox的属性中clickable写成了checked
     public boolean isChecked(){
         return cbStatus.isChecked();
     }
+
 }

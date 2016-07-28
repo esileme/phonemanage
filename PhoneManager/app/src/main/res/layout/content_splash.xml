@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_root_splash"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ic_launcher1">
@@ -8,29 +9,28 @@
         android:id="@+id/tv_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="#f00"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:textStyle="bold"
-        android:text="版本号:1.0" />
+        android:layout_centerVertical="true"
+        android:text="版本号:1.0"
+        android:textColor="#f00"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <ProgressBar
-    android:id="@+id/progressBar"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_version"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-    android:layout_below="@id/tv_version"
-    />
+        android:layout_centerVertical="true" />
 
-<TextView
-    android:id="@+id/tv_progress"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentLeft="true"
-    android:layout_marginLeft="5dp"
-    android:visibility="gone"
-    android:text="下载进度"/>
+    <TextView
+        android:id="@+id/tv_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        android:text="下载进度"
+        android:visibility="gone" />
 </RelativeLayout>
