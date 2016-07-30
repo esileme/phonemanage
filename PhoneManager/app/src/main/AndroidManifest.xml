@@ -7,8 +7,7 @@
     <!-- 读写sdcard权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 指纹识别权限 -->
-    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
-
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
     <application
         android:allowBackup="true"
@@ -34,7 +33,19 @@
             android:label="@string/title_activity_setting" />
         <activity
             android:name=".LostAndFoundActivity"
-            android:label="@string/title_activity_lost_and_found"></activity>
+            android:label="@string/title_activity_lost_and_found" />
+        <activity
+            android:name=".Setup1Activity"
+            android:label="@string/title_activity_setup1" />
+        <activity
+            android:name=".Setup2Activity"
+            android:label="@string/title_activity_setup2" />
+        <activity
+            android:name=".Setup3Activity"
+            android:label="@string/title_activity_setup3" />
+        <activity
+            android:name=".Setup4Activity"
+            android:label="@string/title_activity_setup4"></activity>
     </application>
 
 </manifest>

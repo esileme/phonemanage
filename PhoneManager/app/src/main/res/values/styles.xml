@@ -17,13 +17,43 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!--标题样式-->
     <style name="TitleStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:background">#8866ff00</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">#000</item>
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+    <!--内容字体的样式-->
+    <style name="ContentStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textSize">25sp</item>
     </style>
 
+    <!--下一页button的样式-->
+    <style name="Btn_next_style">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:background">@drawable/button_green_selector</item>
+        <item name="android:text">下一页</item>
+        <item name="android:onClick">next</item>
+    </style>
+    <!--上一页button的样式-->
+    <style name="Btn_prev_style">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:background">@drawable/button_green_selector</item>
+        <item name="android:text">上一页</item>
+        <item name="android:onClick">prev</item>
+    </style>
 </resources>

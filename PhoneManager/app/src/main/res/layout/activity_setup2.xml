@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.android.yl.phonemanager.Setup2Activity">
+
+    <TextView
+        style="@style/TitleStyle"
+        android:gravity="center"
+        android:text="2、手机卡绑定" />
+
+    <TextView
+        style="@style/ContentStyle"
+        android:text="通过绑定SIM卡的变化:" />
+
+    <TextView
+        style="@style/ContentStyle"
+        android:text="下次重启手机若发现SIM卡变化" />
+
+    <TextView
+        style="@style/ContentStyle"
+        android:text="就会发送报警短信" />
+    <com.android.yl.phonemanager.SettingItemView
+        android:id="@+id/siv_update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/setup1"/>
+        <Button
+            style="@style/Btn_next_style"/>
+        <Button
+            style="@style/Btn_prev_style"/>
+    </RelativeLayout>
+
+</LinearLayout>
