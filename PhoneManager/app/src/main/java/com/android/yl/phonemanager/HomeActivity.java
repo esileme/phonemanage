@@ -67,49 +67,6 @@ public class HomeActivity extends Activity {
         });
     }
 
-    /**
-     * 设置密码的对话框设置
-     */
-    private void showEnterPassword() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        dialog = builder.create();
-        View view = View.inflate(this, R.layout.dialog_set_password, null);
-        dialog.setView(view);
-
-        final EditText etPass = (EditText) view.findViewById(R.id.et_password);
-        final EditText etPassConfirm = (EditText) view.findViewById(R.id.et_password_confirm);
-        Button okBtn = (Button) view.findViewById(R.id.btn_ok);//此处应为view.findviewbyid而不是findviewbyid
-        Button cancelBtn = (Button) view.findViewById(R.id.btn_cancel);
-        okBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String passWord = etPass.getText().toString();
-                String passWordConfirm = etPassConfirm.getText().toString();
-                if (!TextUtils.isEmpty(passWord) && !TextUtils.isEmpty(passWordConfirm)) {
-                    if (passWord.equals(passWordConfirm)) {
-                        preferences.edit().putString("password", passWord).commit();
-                        Toast.makeText(HomeActivity.this, "密码设置成功", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    } else {
-                        Toast.makeText(HomeActivity.this, "输入不匹配", Toast.LENGTH_SHORT).show();
-
-                    }
-                } else {
-                    Toast.makeText(HomeActivity.this, "输入不能为空", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-
-        dialog.show();
-    }
 
     /**
      * 定义一个适配器，用来接收gridview里面的主程序视图
@@ -161,6 +118,50 @@ public class HomeActivity extends Activity {
     }
 
     /**
+     * 设置密码的对话框设置
+     */
+    private void showEnterPassword() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        dialog = builder.create();
+        View view = View.inflate(this, R.layout.dialog_set_password, null);
+        dialog.setView(view);
+
+        final EditText etPass = (EditText) view.findViewById(R.id.et_password);
+        final EditText etPassConfirm = (EditText) view.findViewById(R.id.et_password_confirm);
+        Button okBtn = (Button) view.findViewById(R.id.btn_ok);//此处应为view.findviewbyid而不是findviewbyid
+        Button cancelBtn = (Button) view.findViewById(R.id.btn_cancel);
+        okBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String passWord = etPass.getText().toString();
+                String passWordConfirm = etPassConfirm.getText().toString();
+                if (!TextUtils.isEmpty(passWord) && !TextUtils.isEmpty(passWordConfirm)) {
+                    if (passWord.equals(passWordConfirm)) {
+                        preferences.edit().putString("password", MD5Utils.encode(passWord)).commit();
+                        Toast.makeText(HomeActivity.this, "密码设置成功", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                        startActivity(new Intent(HomeActivity.this, LostAndFoundActivity.class));
+                    } else {
+                        Toast.makeText(HomeActivity.this, "输入不匹配", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(HomeActivity.this, "输入不能为空", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        dialog.show();
+    }
+
+    /**
      * 输入密码确认进入页面
      */
     private void showPassWordEnterDialog() {
@@ -175,12 +176,15 @@ public class HomeActivity extends Activity {
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String password = etPass.getText().toString();
+                 String password = etPass.getText().toString().trim();
                 if (!TextUtils.isEmpty(password)) {
-                    final String savedPassword = preferences.getString("password", null);
-                    if (password.equals(savedPassword)) {
+                    String savedPassword = preferences.getString("password", null);
+                    if (MD5Utils.encode(password).equals(savedPassword)) {
                         Toast.makeText(HomeActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
+                        startActivity(new Intent(HomeActivity.this, LostAndFoundActivity.class));
+                    } else {
+                        Toast.makeText(HomeActivity.this, "密码不对", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(HomeActivity.this, "输入不能为空", Toast.LENGTH_SHORT).show();

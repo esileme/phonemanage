@@ -4,7 +4,11 @@
 
     <!-- 添加网络权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 读写sdcard权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 指纹识别权限 -->
+    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
+
 
     <application
         android:allowBackup="true"
@@ -27,7 +31,10 @@
             android:label="@string/title_activity_main" />
         <activity
             android:name=".SettingActivity"
-            android:label="@string/title_activity_setting"></activity>
+            android:label="@string/title_activity_setting" />
+        <activity
+            android:name=".LostAndFoundActivity"
+            android:label="@string/title_activity_lost_and_found"></activity>
     </application>
 
 </manifest>
