@@ -6,9 +6,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 读写sdcard权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--添加启动权限-->
+    <!-- 添加启动权限 -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
+    <!--读联系人权限-->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <!-- 指纹识别权限 -->
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
@@ -49,12 +51,16 @@
         <activity
             android:name=".Setup4Activity"
             android:label="@string/title_activity_setup4" />
-       <!--添加开启启动广播-->
+        <!-- 添加开启启动广播 -->
         <receiver android:name=".BootCompleteReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".ContactActivity"
+            android:label="@string/title_activity_contact"></activity>
     </application>
 
 </manifest>
