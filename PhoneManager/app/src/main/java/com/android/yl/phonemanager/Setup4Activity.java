@@ -3,10 +3,8 @@ package com.android.yl.phonemanager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.app.Activity;
-import android.view.View;
 
-public class Setup4Activity extends Activity {
+public class Setup4Activity extends BaseSetupActivity {
     SharedPreferences preferences;
 
     @Override
@@ -16,25 +14,19 @@ public class Setup4Activity extends Activity {
         preferences = getSharedPreferences("cfg", MODE_PRIVATE);
     }
 
-    /**
-     * 跳转到下一个页面
-     *
-     * @param v
-     */
-    public void next(View v) {
+    @Override
+    public void showNextPage() {
         preferences.edit().putBoolean("configed", true).commit();
         startActivity(new Intent(this, LostAndFoundActivity.class));
         finish();
+        overridePendingTransition(R.anim.tran_in, R.anim.tran_out);
     }
 
-    /**
-     * 跳转到上一个页面
-     *
-     * @param v
-     */
-    public void prev(View v) {
+    @Override
+    public void showPreviousPage() {
         startActivity(new Intent(this, Setup3Activity.class));
         finish();
-    }
+        overridePendingTransition(R.anim.tran_previous_in, R.anim.tran_previous_out);
 
+    }
 }
