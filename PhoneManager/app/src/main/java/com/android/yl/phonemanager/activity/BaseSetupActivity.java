@@ -1,4 +1,4 @@
-package com.android.yl.phonemanager;
+package com.android.yl.phonemanager.activity;
 
 import android.app.Activity;
 import android.os.Bundle;

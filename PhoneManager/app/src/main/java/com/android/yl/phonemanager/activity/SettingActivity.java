@@ -1,9 +1,12 @@
-package com.android.yl.phonemanager;
+package com.android.yl.phonemanager.activity;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+
+import com.android.yl.phonemanager.R;
+import com.android.yl.phonemanager.view.SettingItemView;
 
 public class SettingActivity extends Activity {
 

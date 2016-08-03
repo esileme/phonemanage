@@ -1,4 +1,4 @@
-package com.android.yl.phonemanager;
+package com.android.yl.phonemanager.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,6 +16,9 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.yl.phonemanager.utils.MD5Utils;
+import com.android.yl.phonemanager.R;
 
 /**
  * 主页面
@@ -55,10 +58,16 @@ public class HomeActivity extends Activity {
                 //获取位置信息，判断点击的位置，如果点击到一个item，就跳转到到当前的item
                 //此方法不是在获取position中写，而是在gridview的项目点击监听事件中写
                 switch (position) {
-                    case 8:
+                    case 8://进入设置页面
                         startActivity(new Intent(HomeActivity.this, SettingActivity.class));
                         break;
-                    case 0:
+                    case 1://进入通讯卫士页面
+                        startActivity(new Intent(HomeActivity.this, CallSafeActivity.class));
+                        break;
+                    case 7://进入高级设置
+                        startActivity(new Intent(HomeActivity.this, AtoolsActivity.class));
+                        break;
+                    case 0://进入防盗设置
                         showPassWordDialog();
                         //showEnterPassword();
                         break;
@@ -176,7 +185,7 @@ public class HomeActivity extends Activity {
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 String password = etPass.getText().toString().trim();
+                String password = etPass.getText().toString().trim();
                 if (!TextUtils.isEmpty(password)) {
                     String savedPassword = preferences.getString("password", null);
                     if (MD5Utils.encode(password).equals(savedPassword)) {

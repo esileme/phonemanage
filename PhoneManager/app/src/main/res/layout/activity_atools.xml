@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.AtoolsActivity">
+
+    <TextView
+        style="@style/TitleStyle"
+        android:gravity="center"
+        android:text="高级设置" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
+        android:drawableLeft="@android:drawable/ic_menu_camera"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:text="归属地查询"
+        android:textColor="#000"
+        android:clickable="true"
+        android:onClick="numberAddressQuery"
+        android:textSize="20sp" />
+</LinearLayout>

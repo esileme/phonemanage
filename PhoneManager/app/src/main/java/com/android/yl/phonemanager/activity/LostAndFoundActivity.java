@@ -1,10 +1,12 @@
-package com.android.yl.phonemanager;
+package com.android.yl.phonemanager.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
+
+import com.android.yl.phonemanager.R;
 
 public class LostAndFoundActivity extends Activity {
 

@@ -1,4 +1,4 @@
-package com.android.yl.phonemanager;
+package com.android.yl.phonemanager.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

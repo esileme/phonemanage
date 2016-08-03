@@ -1,7 +1,9 @@
-package com.android.yl.phonemanager;
+package com.android.yl.phonemanager.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.android.yl.phonemanager.R;
 
 /**
  * 第二个设置页面

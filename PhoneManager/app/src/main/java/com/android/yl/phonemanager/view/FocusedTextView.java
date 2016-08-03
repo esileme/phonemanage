@@ -1,4 +1,4 @@
-package com.android.yl.phonemanager;
+package com.android.yl.phonemanager.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -1,10 +1,12 @@
-package com.android.yl.phonemanager;
+package com.android.yl.phonemanager.activity;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.android.yl.phonemanager.R;
 
 public class Setup3Activity extends BaseSetupActivity {
     private Button btnselectContact;

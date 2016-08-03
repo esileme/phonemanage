@@ -1,4 +1,4 @@
-package com.android.yl.phonemanager;
+package com.android.yl.phonemanager.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.android.yl.phonemanager.R;
 
 /**
  * 在设置中心中，调用此方法，用来加载视图

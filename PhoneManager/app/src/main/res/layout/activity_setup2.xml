@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.android.yl.phonemanager.Setup2Activity">
+    tools:context=".activity.Setup2Activity">
 
     <TextView
         style="@style/TitleStyle"
@@ -22,7 +22,7 @@
     <TextView
         style="@style/ContentStyle"
         android:text="就会发送报警短信" />
-    <com.android.yl.phonemanager.SettingItemView
+    <com.android.yl.phonemanager.view.SettingItemView
         android:id="@+id/siv_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

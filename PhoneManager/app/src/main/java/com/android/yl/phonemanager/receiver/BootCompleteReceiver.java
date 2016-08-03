@@ -1,4 +1,4 @@
-package com.android.yl.phonemanager;
+package com.android.yl.phonemanager.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
