@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.SystemClock;
 
 import com.android.yl.phonemanager.bean.BlackNumberInfo;
 
@@ -110,6 +111,7 @@ public class BlackNumberDao {
         }
         cursor.close();
         db.close();
+        SystemClock.sleep(3000);//等三秒时间加载
         return blackNumberInfos;
 
     }

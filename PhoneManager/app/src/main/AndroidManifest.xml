@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android.yl.phonemanager">
+
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -71,12 +73,12 @@
             android:name=".activity.CallSafeActivity"
             android:label="@string/title_activity_call_safe"></activity>
 
-        <!--<instrumentation
+        <instrumentation
             android:name="android.test.InstrumentationTestRunner"
             android:targetPackage="com.android.yl.phonemanager" />
-
-        <uses-library android:name="android.test.runner"></uses-library>-->
+        <uses-library android:name="android.test.runner"></uses-library>
 
     </application>
+
 
 </manifest>
