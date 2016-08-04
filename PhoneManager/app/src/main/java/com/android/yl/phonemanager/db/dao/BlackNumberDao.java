@@ -115,4 +115,31 @@ public class BlackNumberDao {
         return blackNumberInfos;
 
     }
+
+    /**
+     * 分页加载数据
+     * <p/>
+     * limit 表示限制有多少数据
+     * offset表示跳过  从第几条开始
+     *
+     * @param pageNumber 表示当前有那几个页
+     * @param pageSize   表示当前页面大小
+     * @return
+     */
+    public List<BlackNumberInfo> findPar(int pageNumber, int pageSize) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select number,mode from blacknumber limit ?offset ?",
+                new String[]{String.valueOf(pageSize), String.valueOf(pageNumber * pageSize)});
+        ArrayList<BlackNumberInfo> blackNumberInfos = new ArrayList<BlackNumberInfo>();
+        while (cursor.moveToNext()) {
+            final BlackNumberInfo blackNumberInfo = new BlackNumberInfo();
+            blackNumberInfo.setMode(cursor.getString(1));
+            blackNumberInfo.setNumber(cursor.getString(0));
+            blackNumberInfos.add(blackNumberInfo);
+        }
+        cursor.close();
+        db.close();
+        return blackNumberInfos;
+
+    }
 }
