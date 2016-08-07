@@ -305,8 +305,8 @@ public class SplashActivity extends AppCompatActivity {
     private void copyDB(String dbName) {
         File filesDir = getFilesDir();
         System.out.println("路径:" + filesDir.getAbsolutePath());
-        File destFile = new File(getFilesDir(), dbName);// 要拷贝的目标地址
 
+        File destFile = new File(getFilesDir(), dbName);// 要拷贝的目标地址
         if (destFile.exists()) {
             System.out.println("数据库" + dbName + "已存在!");
             return;
