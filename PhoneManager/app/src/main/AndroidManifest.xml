@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <!-- 指纹识别权限 -->
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
-    <!--震动权限-->
+    <!-- 震动权限 -->
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -78,7 +78,12 @@
 
         <uses-library android:name="android.test.runner" />
 
-        <activity android:name=".activity.AddressActivity"></activity>
+        <activity android:name=".activity.AddressActivity" />
+
+        <service
+            android:name=".service.AddressService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
