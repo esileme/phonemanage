@@ -2,9 +2,13 @@ package com.android.yl.phonemanager.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -46,8 +50,20 @@ public class AddressActivity extends Activity {
 
     public void query(View view) {
         String number = et_number.getText().toString().trim();
-        String address = AddressDao.getAddress(number);
-        tv_result.setText(address);
+        if (!TextUtils.isEmpty(number)) {
+            String address = AddressDao.getAddress(number);
+            tv_result.setText(address);
+        } else {
+            Animation animation = AnimationUtils.loadAnimation(AddressActivity.this, R.anim.shake);
+            et_number.startAnimation(animation);
+            virbrate();
 
+        }
+
+    }
+
+    public void virbrate() {
+        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        vibrator.vibrate(new long[]{200, 500, 300}, -1);//-1表示不循环，0表示从第0个开始，1表示从第一个开始
     }
 }
