@@ -40,9 +40,9 @@ public class CallSafeActivity extends Activity {
             listview.setAdapter(adapter);//给listview设置接收器
         }
     };
-
     /**
      * init data
+     * <p/>
      * 初始化数据要在子线程中
      */
     private void initData() {

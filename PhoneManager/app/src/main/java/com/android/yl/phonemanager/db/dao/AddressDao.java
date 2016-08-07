@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
  * Created by Administrator on 2016/8/3.
  */
 public class AddressDao {
-    public static final String path="/data/user/0/com.android.yl.phonemanager/files/address.db";
+    public static final String path="/data/data/com.android.yl.phonemanager/files/address.db";
     public static String getAddress(String number){
         SQLiteDatabase database=SQLiteDatabase.openDatabase(path,null,SQLiteDatabase.OPEN_READONLY);
             return null;
