@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.yl.phonemanager.R;
+import com.android.yl.phonemanager.service.AddressService;
 import com.android.yl.phonemanager.utils.StreamUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -90,6 +91,8 @@ public class SplashActivity extends AppCompatActivity {
         tvVersion.setText("版本号:" + getVersionName());
 
         copyDB("address.db");
+        startService(new Intent(SplashActivity.this, AddressService.class));//开启来电服务
+
 
         tvProgress = (TextView) findViewById(R.id.tv_progress);
         SharedPreferences preferences = getSharedPreferences("cfg", MODE_PRIVATE);
