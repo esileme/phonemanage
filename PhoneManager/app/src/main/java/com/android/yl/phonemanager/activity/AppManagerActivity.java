@@ -101,7 +101,7 @@ public class AppManagerActivity extends Activity {
             }
             AppInfo appInfo = appInfos.get(position);
             holder.iv_icon.setImageDrawable(appInfo.getIcon());
-            //holder.tv_apk_size.setTextSize(appInfo.getAppSize());//获取不到app的大小
+            holder.tv_apk_size.setText(Formatter.formatFileSize(AppManagerActivity.this, appInfo.getAppSize()));//不是settextsize.....
             holder.tv_name.setText(appInfo.getAppName());
             if (appInfo.isRom()) {
                 holder.tv_location.setText("手机内存");
