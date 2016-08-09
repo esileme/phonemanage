@@ -17,8 +17,10 @@
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
     <!-- 震动权限 -->
     <uses-permission android:name="android.permission.VIBRATE" />
-    <!--打电话权限-->
+    <!-- 打电话权限 -->
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <!--获取包大小权限-->
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
 
     <application
         android:allowBackup="true"
@@ -87,7 +89,8 @@
             android:enabled="true"
             android:exported="true" />
 
-        <!--添加监听去电的广播   -在addressservice中动态注册
+        <!--
+        添加监听去电的广播   -在addressservice中动态注册
         <receiver
             android:name=".receiver.OutCallReceiver"
             android:enabled="true"
@@ -95,8 +98,12 @@
             <intent-filter>
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL"></action>
             </intent-filter>
-        </receiver>-->
+        </receiver>
+        -->
 
+        <activity
+            android:name=".activity.AppManagerActivity"
+            android:label="@string/title_activity_app_manager"></activity>
     </application>
 
 </manifest>
