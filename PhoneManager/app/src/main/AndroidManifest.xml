@@ -59,6 +59,9 @@
         <activity
             android:name=".activity.Setup4Activity"
             android:label="@string/title_activity_setup4" />
+        <activity
+            android:name=".activity.AppManagerActivity"
+            android:label="AppManagerActivity" />
         <!-- 添加开启启动广播 -->
         <receiver android:name=".receiver.BootCompleteReceiver">
             <intent-filter>
@@ -101,9 +104,6 @@
         </receiver>
         -->
 
-        <activity
-            android:name=".activity.AppManagerActivity"
-            android:label="@string/title_activity_app_manager"></activity>
     </application>
 
 </manifest>
