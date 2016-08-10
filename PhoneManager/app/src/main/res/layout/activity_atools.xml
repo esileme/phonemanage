@@ -15,13 +15,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button"
+        android:clickable="true"
         android:drawableLeft="@android:drawable/ic_menu_camera"
         android:drawablePadding="5dp"
         android:gravity="center_vertical"
+        android:onClick="numberAddressQuery"
         android:padding="10dp"
         android:text="归属地查询"
         android:textColor="#000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
         android:clickable="true"
-        android:onClick="numberAddressQuery"
+        android:drawableLeft="@android:drawable/ic_menu_camera"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:onClick="backUpsms"
+        android:padding="10dp"
+        android:text="短信备份"
+        android:textColor="#000"
         android:textSize="20sp" />
 </LinearLayout>

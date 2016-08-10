@@ -3,6 +3,7 @@ package com.android.yl.phonemanager.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -207,8 +208,18 @@ public class AppManagerActivity extends Activity implements View.OnClickListener
                 popupWindowDismiss();
                 break;
             case R.id.ll_share:
+                Intent share_localIntent = new Intent("android.intent.action.SEND");
+                share_localIntent.setType("text/plain");
+                share_localIntent.putExtra("android.intent.extra.SUBJECT", "f分享");
+                share_localIntent.putExtra("android.intent.extra.TEXT",
+                        "Hi！推荐您使用软件：" + clickAppInfo.getAppName() + "下载地址:" + "https://play.google.com/store/apps/details?id=" + clickAppInfo.getPackageName());
+                this.startActivity(Intent.createChooser(share_localIntent, "分享"));
+                popupWindowDismiss();
                 break;
             case R.id.ll_uninstal:
+                Intent uninstall_localIntent = new Intent("android.intent.action.DELETE", Uri.parse("package:" + clickAppInfo.getPackageName()));
+                startActivity(uninstall_localIntent);
+                popupWindowDismiss();
                 break;
         }
 
