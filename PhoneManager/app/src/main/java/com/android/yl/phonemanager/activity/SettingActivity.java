@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.android.yl.phonemanager.R;
 import com.android.yl.phonemanager.service.AddressService;
-import com.android.yl.phonemanager.utils.ServiceStatusUtils;
+import com.android.yl.phonemanager.utils.SystemInfoUtils;
 import com.android.yl.phonemanager.view.SettingItemView;
 
 public class SettingActivity extends Activity {
@@ -73,7 +73,7 @@ public class SettingActivity extends Activity {
 
         //先findviewbyid，否则会空指针异常
         //判断服务是否在后台运行，如果运行，则设置勾选框为true，为了防止第三方软件结束进程而出现扔勾选运行的情况
-        boolean running = ServiceStatusUtils.isServiceRunning(SettingActivity.this,
+        boolean running = SystemInfoUtils.isServiceRunning(SettingActivity.this,
                 "com.android.yl.phonemanager.service.AddressService");
         //System.out.println(running);
         if (running) {
