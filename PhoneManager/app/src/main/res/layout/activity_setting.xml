@@ -18,7 +18,7 @@
     <com.android.yl.phonemanager.view.SettingItemView
         android:id="@+id/siv_address"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 
 
 </LinearLayout>

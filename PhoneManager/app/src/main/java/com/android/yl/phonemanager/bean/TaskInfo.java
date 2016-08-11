@@ -1,4 +1,4 @@
-package com.android.yl.phonemanager.db.dao;
+package com.android.yl.phonemanager.bean;
 
 import android.graphics.drawable.Drawable;
 
@@ -17,6 +17,15 @@ public class TaskInfo {
     private String appName;
     private long memorySize;
     private boolean userApp;
+    private boolean checked;
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
 
     public Drawable getIcon() {
         return icon;

@@ -10,7 +10,7 @@ import android.os.Build;
 import android.os.Debug;
 
 import com.android.yl.phonemanager.R;
-import com.android.yl.phonemanager.db.dao.TaskInfo;
+import com.android.yl.phonemanager.bean.TaskInfo;
 
 import java.util.ArrayList;
 import java.util.List;

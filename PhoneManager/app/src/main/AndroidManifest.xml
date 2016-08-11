@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- 添加网络权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!--添加杀后台进程权限-->
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
     <!-- 读写sdcard权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 添加启动权限 -->
