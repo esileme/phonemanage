@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PhoneManager.iml" filepath="$PROJECT_DIR$/PhoneManager.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/surfaceview/surfaceview.iml" filepath="$PROJECT_DIR$/surfaceview/surfaceview.iml" />
     </modules>
   </component>
 </project>

@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.yl.phonemanager.R;
+import com.android.yl.phonemanager.db.dao.AntivirusDao;
 import com.android.yl.phonemanager.service.AddressService;
 import com.android.yl.phonemanager.utils.StreamUtils;
 import com.lidroid.xutils.HttpUtils;
@@ -91,6 +92,9 @@ public class SplashActivity extends AppCompatActivity {
         tvVersion.setText("版本号:" + getVersionName());
 
         copyDB("address.db");
+        copyDB("antivirus.db");
+        updateVirus();
+
         startService(new Intent(SplashActivity.this, AddressService.class));//开启来电服务
 
 
@@ -108,6 +112,32 @@ public class SplashActivity extends AppCompatActivity {
         } else {
             mHandler.sendEmptyMessageDelayed(CODE_ENTER_HOME, 2000);
         }
+    }
+
+    private void updateVirus() {
+        final AntivirusDao dao = new AntivirusDao();
+        HttpUtils httpUtils = new HttpUtils();
+        String url = "http://192.168.1.106:8080/update.json";
+       /* httpUtils.send("GET", url, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                try {
+                    //json解析数据
+                    JSONObject object = new JSONObject(responseInfo.result);
+                    String md5 = object.getString("md5");
+                    String desc = object.getString("desc");
+
+                    dao.addVirus(md5,desc);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
+
+            }
+        });*/
     }
 
     /**

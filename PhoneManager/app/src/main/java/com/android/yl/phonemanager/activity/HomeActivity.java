@@ -71,6 +71,9 @@ public class HomeActivity extends Activity {
                     case 3://进入进程管理
                         startActivity(new Intent(HomeActivity.this, TaskManagerActivity.class));
                         break;
+                    case 5://进入病毒查杀
+                        startActivity(new Intent(HomeActivity.this, AntivirusActivity.class));
+                        break;
                     case 7://进入高级设置
                         startActivity(new Intent(HomeActivity.this, AtoolsActivity.class));
                         break;

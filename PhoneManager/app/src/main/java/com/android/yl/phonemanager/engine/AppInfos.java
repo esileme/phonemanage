@@ -19,7 +19,7 @@ public class AppInfos {
 
     static List<AppInfo> packageAppInfos = new ArrayList<AppInfo>();//初始化appinfo的信息
 
-
+    //获取包的管理器
     public static List<AppInfo> getAppInfos(Context context) {
         PackageManager packageManager = context.getPackageManager();
         List<PackageInfo> installedPackages = packageManager.getInstalledPackages(0);
