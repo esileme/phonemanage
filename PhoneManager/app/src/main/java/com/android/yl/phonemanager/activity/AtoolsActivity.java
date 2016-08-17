@@ -24,7 +24,15 @@ public class AtoolsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_atools);
+        initVideo();
 
+
+    }
+
+    /**
+     * 初始化播放器数据
+     */
+    private void initVideo() {
         Uri uri = Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/tencent/QQfile_recv/1.mp4");
         //Uri uri = Uri.parse("http://localhost:8080/tt.mp4");
         //Uri uri = Uri.parse("http://data.vod.itc.cn/?rb=1&prot=1&key=jbZhEJhlqlUN-Wj_HEI8BjaVqKNFvDrn&prod=flash&pt=1&new=/218/73/f7H15r7zTLys0J6z53cmwC.mp4");
@@ -69,6 +77,11 @@ public class AtoolsActivity extends Activity {
                 dialog.dismiss();
             }
         }.start();
+
+    }
+
+    public void appLock(View view) {
+        startActivity(new Intent(this,ApplockActivity.class));
 
     }
 }

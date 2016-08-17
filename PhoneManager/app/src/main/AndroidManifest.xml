@@ -110,7 +110,8 @@
         <activity
             android:name=".activity.TaskManagerActivity"
             android:label="@string/title_activity_task_manager" />
-        <activity android:name=".activity.AntivirusActivity"></activity>
+        <activity android:name=".activity.AntivirusActivity" />
+        <activity android:name=".activity.ApplockActivity"></activity>
     </application>
 
 </manifest>

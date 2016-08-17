@@ -54,12 +54,12 @@ public class AppInfos {
                 appInfo.setIsRom(true);
             }
 
-            System.out.println("=================");
+            /*System.out.println("=================");
             System.out.println("图片" + drawable);
             System.out.println("名字" + apkName);
             System.out.println("包名" + packageName);
             System.out.println("路径" + sourceDir);
-            System.out.println("大小" + apkSize);
+            System.out.println("大小" + apkSize);*/
             packageAppInfos.add(appInfo);
         }
 
